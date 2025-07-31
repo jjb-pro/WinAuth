@@ -9,9 +9,9 @@
 
   <Identity
     Publisher="CN=jjb"
-    Version="1.1.1.0"  Name="AD62B891-E90B-447B-B2AB-9C521B08AAFC"/>
+    Version="1.0.1.0"  Name="AD62B891-E90B-447B-B2AB-9C521B08AAFC"/>
 
-  <mp:PhoneIdentity PhoneProductId="CE61232F-B17B-44EC-8DC3-8FC1392C1C05" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="AD62B891-E90B-447B-B2AB-9C521B08AAFC" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>WinAuth</DisplayName>
@@ -35,7 +35,7 @@
         DisplayName="WinAuth"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Authenticator app for the Universal Windows Platform."
+        Description="A simple authenticator app for generating TOTP codes on Windows Mobile."
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#000000"/>
@@ -44,7 +44,6 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="internetClient" />
     <DeviceCapability Name="webcam"/>
   </Capabilities>
 </Package>

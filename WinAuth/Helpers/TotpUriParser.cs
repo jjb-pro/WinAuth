@@ -47,7 +47,7 @@ public static class TotpUriParser
 
         return new TotpEntry
         {
-            Issuer = issuer ?? string.Empty,
+            Issuer = issuer ?? "Unnamed issuer",
             Account = account,
             Secret = secret,
             Digits = digits,

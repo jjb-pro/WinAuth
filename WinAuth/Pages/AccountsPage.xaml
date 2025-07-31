@@ -60,7 +60,7 @@
                                 <MenuFlyoutItem
                                     Command="{Binding ViewModel.GetOTPCommand, ElementName=root}"
                                     CommandParameter="{Binding}"
-                                    Text="Get OTP" />
+                                    Text="Get time-based one-time password" />
                                 <MenuFlyoutItem
                                     Command="{Binding ViewModel.RemoveEntryCommand, ElementName=root}"
                                     CommandParameter="{Binding}"

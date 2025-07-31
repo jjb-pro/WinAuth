@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Nullable>enable</Nullable>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{CEF1F958-53C8-4FC1-9270-FB683CD6E982}</ProjectGuid>
@@ -28,7 +29,7 @@
     <AppxBundle>Auto</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <PackageCertificateKeyFile />
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
@@ -142,7 +143,6 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Helpers\Base32Helper.cs" />
     <Compile Include="Helpers\TotpHelper.cs" />
-    <Compile Include="Messages\NewTotpMessage.cs" />
     <Compile Include="Messages\UseTotpMessage.cs" />
     <Compile Include="Models\TotpEntry.cs" />
     <Compile Include="Pages\AccountsPage.xaml.cs">

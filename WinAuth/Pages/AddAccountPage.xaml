@@ -17,6 +17,11 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
+        <controls:QRCodeScanner
+            Grid.RowSpan="2"
+            DetectedCode="{x:Bind ViewModel.Secret, Mode=TwoWay}"
+            DetectedCodeChanged="{x:Bind ViewModel.OnDetectedCodeChanged}" />
+
         <Button
             MinWidth="40"
             MinHeight="40"
@@ -24,19 +29,12 @@
             Padding="12"
             Background="Transparent"
             Canvas.ZIndex="1"
-            Command="{x:Bind ViewModel.GoBackCommand}"
-            Style="{StaticResource ButtonRevealStyle}">
+            Command="{x:Bind ViewModel.GoBackCommand}">
             <FontIcon
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="18"
                 Glyph="&#xE72B;" />
         </Button>
-
-        <controls:QRCodeScanner
-            x:Name="scanner"
-            Grid.RowSpan="2"
-            DetectedCode="{x:Bind ViewModel.Secret, Mode=TwoWay}"
-            DetectedCodeChanged="{x:Bind ViewModel.OnDetectedCodeChanged}" />
     </Grid>
 </Page>

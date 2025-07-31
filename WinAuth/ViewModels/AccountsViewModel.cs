@@ -1,62 +1,28 @@
+#nullable enable
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
-using System.Linq;
 using WinAuth.Messages;
 using WinAuth.Models;
 using WinAuth.Services;
 
 namespace WinAuth.ViewModels;
 
-public partial class AccountsViewModel : ObservableRecipient, IRecipient<NewTotpMessage>
+public partial class AccountsViewModel(ISecretsService secretsService, INavigationService navigationService) : ObservableObject
 {
-    private readonly ISecretsService _secretsService;
-    private readonly INavigationService _navigationService;
-    private readonly IDialogService _dialogService;
+    public ObservableCollection<TotpEntry> Entries { get; } = new(secretsService.LoadAllEntries());
 
-    public ObservableCollection<TotpEntry> Entries { get; }
-
-    [ObservableProperty] private TotpEntry? _selectedEntry;
-
-    public AccountsViewModel(ISecretsService secretsService, INavigationService navigationService, IDialogService dialogService)
-    {
-        _secretsService = secretsService;
-        _navigationService = navigationService;
-        _dialogService = dialogService;
-
-        Entries = new(_secretsService.LoadAllEntries());
-
-        IsActive = true;
-    }
-
-    protected override void OnActivated() => WeakReferenceMessenger.Default.RegisterAll(this);
-
-    protected override void OnDeactivated() => WeakReferenceMessenger.Default.UnregisterAll(this);
-
-    public async void Receive(NewTotpMessage message)
-    {
-        var newEntry = message.Entry;
-
-        if (Entries.Any(e => newEntry.Id == e.Id))
-        {
-            await _dialogService.ShowErrorDialogAsync(
-                "Duplicate Account",
-                $"The account \"{newEntry.Account}\" for issuer \"{newEntry.Issuer}\" has already been added.");
-        }
-        else
-        {
-            Entries.Add(newEntry);
-        }
-    }
+    [ObservableProperty]
+    private TotpEntry? _selectedEntry;
 
     [RelayCommand]
-    private void OnAddEntry() => _navigationService.NavigateTo<AddAccountViewModel>();
+    private void OnAddEntry() => navigationService.NavigateTo<AddAccountViewModel>();
 
     [RelayCommand]
     private void OnRemoveEntry(TotpEntry entry)
     {
-        _secretsService.DeleteEntry(entry.Id);
+        secretsService.RemoveEntry(entry.Id);
         Entries.Remove(entry);
     }
 
@@ -70,8 +36,8 @@ public partial class AccountsViewModel : ObservableRecipient, IRecipient<NewTotp
     {
         if (null == SelectedEntry)
             return;
-        
-        _navigationService.NavigateTo<OTPCodeViewModel>(TransitionAnimation.Slide);
+
+        navigationService.NavigateTo<OTPCodeViewModel>();
         WeakReferenceMessenger.Default.Send(new UseTotpMessage(SelectedEntry));
 
         SelectedEntry = null;

@@ -1,7 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using WinAuth.Messages;
 using WinAuth.Parsers;
 using WinAuth.Services;
 
@@ -23,8 +21,6 @@ public partial class AddAccountViewModel(ISecretsService secretsService, INaviga
             secretsService.SaveEntry(newEntry);
 
             navigationService.GoBack();
-
-            WeakReferenceMessenger.Default.Send(new NewTotpMessage(newEntry));
         }
         catch
         {

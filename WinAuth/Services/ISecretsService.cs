@@ -5,7 +5,7 @@ namespace WinAuth.Services
 {
     public interface ISecretsService
     {
-        void DeleteEntry(string id);
+        void RemoveEntry(string id);
         List<TotpEntry> LoadAllEntries();
         void SaveEntry(TotpEntry entry);
     }

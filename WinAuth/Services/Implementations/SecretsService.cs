@@ -13,7 +13,7 @@ public class SecretsService : ISecretsService
     public void SaveEntry(TotpEntry entry)
     {
         var id = $"{entry.Issuer}:{entry.Account}";
-        DeleteEntry(id);
+        RemoveEntry(id);
 
         string json = SerializeTotpEntry(entry);
         _vault.Add(new PasswordCredential(ResourceName, id, json));
@@ -38,7 +38,7 @@ public class SecretsService : ISecretsService
         return entries;
     }
 
-    public void DeleteEntry(string id)
+    public void RemoveEntry(string id)
     {
         try
         {
